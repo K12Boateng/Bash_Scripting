@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Set the directory name
+DIR_NAME="Kwame_project"
+
+# Create the directory
+mkdir -p "$DIR_NAME"
+
+# Check if the directory was created successfully
+if [ $? -ne 0 ]; then
+  echo "Failed to create directory $DIR_NAME"
+  exit 1
+fi
+
+# Create the files within the directory
+touch "$DIR_NAME/index.html"
+touch "$DIR_NAME/styles.css"
+touch "$DIR_NAME/script.js"
+
+# Check if the files were created successfully
+if [ $? -ne 0 ]; then
+  echo "Failed to create one or more files in $DIR_NAME"
+  exit 1
+fi
+
+# Display a success message
+echo "Directory $DIR_NAME and files index.html, styles.css, script.js have been created successfully."
+
+exit 0

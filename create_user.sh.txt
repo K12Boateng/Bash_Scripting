@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Check if the script is run as root
+if [ "$(id -u)" -ne 0 ]; then
+  echo "This script must be run as root. Use sudo to run the script."
+  exit 1
+fi
+
+# Set the username and password
+USERNAME="Kwame"
+PASSWORD="20481024"
+
+# Create the user with the home directory and default shell
+useradd -m -s /bin/bash "$USERNAME"
+
+# Check if the user was created successfully
+if [ $? -ne 0 ]; then
+  echo "Failed to create user $USERNAME"
+  exit 1
+fi
+
+# Set the user's password
+echo "$USERNAME:$PASSWORD" | chpasswd
+
+# Force the user to change the password on the first login
+passwd --expire "$USERNAME"
+
+# Display the username and password
+echo "User $USERNAME has been created with the password: $PASSWORD"
+echo "Please change the password on the first login."
+
+exit 0
